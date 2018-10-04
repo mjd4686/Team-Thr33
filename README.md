@@ -1,5 +1,5 @@
 # Thr33
-Projecy for CS320
+Project for CS320
 Lets get this bread brothers
 ##Django
 This repo contains a django project here is some quick info to get started:
