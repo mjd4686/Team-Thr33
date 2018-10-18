@@ -1,0 +1,18 @@
+{% extends "generic.html" %}
+
+{% block title %}
+  <title>Start</title>
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+        {% csrf_token %}
+        <div class="table text-right">
+          <!--"as_ul renders form lines in <li> tags  -->
+          {{ form.as_p }}
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit">Continue</button>
+
+</form>
+{% endblock %}
