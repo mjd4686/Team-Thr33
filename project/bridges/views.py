@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from bridges.models import Survey
+from django.views.generic import TemplateView
 
 # Create your views here.
 
@@ -13,14 +13,16 @@ def index(request):
         'index.html',
     )
 
+from .models import Survey
 from .forms import SurveyForm
-
-def form(request):
+#from django.http import HttpResponseRedirect
+class form(TemplateView):
     """
-    View function for home page of site.
+    View function for form.html
     """
     # Render the HTML template index.html with the data in the context variable
     template = 'form.html'
+
 
     def get(self, request):
         form = SurveyForm()
