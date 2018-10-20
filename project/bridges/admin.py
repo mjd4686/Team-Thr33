@@ -5,6 +5,6 @@ from bridges.models import Survey
 
 
 class SurveyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'year', 'dob')
+    list_display = ('name', 'email', 'phone', 'year', 'pronoun', 'dob', 'color', 'firstgen', 'workstudy', 'major')
 
 admin.site.register(Survey, SurveyAdmin)
