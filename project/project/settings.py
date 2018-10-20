@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bridges.apps.BridgesConfig'
+    'bridges.apps.BridgesConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

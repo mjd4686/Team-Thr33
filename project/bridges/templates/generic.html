@@ -14,6 +14,7 @@
 
     <!--Static CSS -->
     {% load static %}
+    {{ form.media }}
     <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
 
     <!--Tab Logo-->
@@ -23,8 +24,16 @@
 	</head>
 
   <body class="text-center">
-
-  {% block content %}{% endblock %}
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h1 class="mt-2">Student Bridges</h1>
+          <hr class="mt-0 mb-4">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
 
 
 		<!-- Scripts -->
@@ -36,6 +45,6 @@
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 		<script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
 		<script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-
+    
 	</body>
 </html>
