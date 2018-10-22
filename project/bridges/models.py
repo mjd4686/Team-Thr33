@@ -22,7 +22,7 @@ class Survey(models.Model):
     phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
     year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")  
     pronoun = models.CharField(max_length=20, null=True, blank=True, help_text="e.g Him/his/he")    
-    dob = forms.DateField(widget=forms.SelectDateWidget())
+    dob = models.DateField(null=True, blank=True)
     color = models.BooleanField(default=False)
     firstgen = models.BooleanField(default=False)
     workstudy = models.BooleanField(default=False)

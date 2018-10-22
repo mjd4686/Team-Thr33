@@ -15,11 +15,11 @@ class SurveyForm(forms.ModelForm):
     phone = forms.CharField(label='Phone Number',max_length=10)
     year = forms.IntegerField(label='Graduation Year', min_value=datetime.now().year, max_value=datetime.now().year+6)
     pronoun = forms.CharField(label='Preferred Pronouns', max_length=20)    
-    color = forms.TypedChoiceField(coerce=lambda x: x =='True', 
+    color = forms.TypedChoiceField(label='Person of Color',coerce=lambda x: x =='True', 
                                    choices=((False, 'No'), (True, 'Yes')))
-    firstgen = forms.TypedChoiceField(coerce=lambda x: x =='True', 
+    firstgen = forms.TypedChoiceField(label='First Gen Student',coerce=lambda x: x =='True', 
                                    choices=((False, 'No'), (True, 'Yes')))
-    workstudy = forms.TypedChoiceField(coerce=lambda x: x =='True', 
+    workstudy = forms.TypedChoiceField(label='Work Study',coerce=lambda x: x =='True', 
                                    choices=((False, 'No'), (True, 'Yes')))
     major = forms.CharField(label='Major', max_length=50)
 
