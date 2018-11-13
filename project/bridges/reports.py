@@ -13,13 +13,13 @@ class DemographicPieChart():
         Query the db for chart data, pack them into a dict and return it.
         '''
         data = {}
-        data["Color"] = 0
-        data["Not Color"] = 0
+        data["Person of Color"] = 0
+        data["Caucasian"] = 0
         for person in Survey.objects.all():
             if person.color:
-                data["Color"] = data["Color"]+1
+                data["Person of Color"] = data["Person of Color"]+1
             else :
-                data["Not Color"] = data["Not Color"]+1
+                data["Caucasian"] = data["Caucasian"]+1
         # data["Color"] = sum(Survey.objects.all().color)
         # data["NotColor"] = 500
         
