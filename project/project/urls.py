@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from bridges.views import survey_article_list,ChartData
+from bridges import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('surveys/',views.survey_article_list,name ='surveys'),
+    path('api/chart/data',views.ChartData.as_view(),name ='api-chart-data'),
 ]
 
 # Use include() to add paths from the catalog application
@@ -42,4 +45,5 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
+
 ]

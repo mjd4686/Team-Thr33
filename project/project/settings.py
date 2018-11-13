@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bridges.apps.BridgesConfig',
     'widget_tweaks',
+    'import_export',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
