@@ -7,4 +7,5 @@ urlpatterns = [
     path('form/', views.form.as_view(), name='form'),
     path('surveys/',views.survey_article_list,name ='surveys'),
     path('api/chart/data',views.ChartData().as_view()),
+    path('graph/', views.IndexView.as_view(), name='graph'),
 ]

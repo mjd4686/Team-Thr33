@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from .models import Survey
+from pygal.style import CleanStyle
+
+from .reports import DemographicPieChart
 # Create your views here.
 
 def index(request):
@@ -65,3 +68,27 @@ class ChartData(APIView):
 
 def survey_article_list(request):
     return render(request,"chart.html",{})
+
+class IndexView(TemplateView):
+    template_name = 'graph.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+
+        # Instantiate our chart. We'll keep the size/style/etc.
+        # config here in the view instead of `charts.py`.
+        cht_color = DemographicPieChart(
+            height=600,
+            width=800,
+            explicit_size=True,
+            style=CleanStyle
+        )
+
+        # Call the `.generate()` method on our chart object
+        # and pass it to template context.
+        context['cht_color'] = cht_color.generate()
+        return context
+
+def survey_graph(request):
+    return render(request,"graph.html",{})
+
