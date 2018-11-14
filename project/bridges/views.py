@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from .models import Survey
 from pygal.style import CleanStyle
+from pygal.style import DefaultStyle
+
 
 from .reports import DemographicPieChart
 from .reports import MajorPieChart
@@ -82,14 +84,14 @@ class IndexView(TemplateView):
             height=600,
             width=800,
             explicit_size=True,
-            style=CleanStyle
+            style=DefaultStyle
         )
 
         cht_major = MajorPieChart(
             height=600,
             width=800,
             explicit_size=True,
-            style=CleanStyle
+            style=DefaultStyle
         )
 
         # Call the `.generate()` method on our chart object

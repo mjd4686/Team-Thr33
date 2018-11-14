@@ -6,7 +6,7 @@ class DemographicPieChart():
 
     def __init__(self, **kwargs):
         self.chart = pygal.Pie(**kwargs)
-        self.chart.title = 'Color vs Non-Color People'
+        self.chart.title = 'Demographics'
 
     def get_data(self):
         '''
@@ -36,8 +36,8 @@ class DemographicPieChart():
 class MajorPieChart():
 
     def __init__(self, **kwargs):
-        self.chart = pygal.Pie(**kwargs)
-        self.chart.title = 'Color vs Non-Color People'
+        self.chart = pygal.Bar(**kwargs)
+        self.chart.title = 'Major Breakdown'
 
     def get_data(self):
         '''
