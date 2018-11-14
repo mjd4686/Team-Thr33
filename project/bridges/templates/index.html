@@ -10,33 +10,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md">
-      <!--
-    ~~~~  About Pannel ~~~~
-      -->
       <div class="row justify-content-md-center">
-        <h1 class="display-4">Index Page</h1>
+          <h1 class="h3 mb-3 font-weight-normal">Get Started</h1>
       </div>
       <div class="row justify-content-md-center">
-        <div class="col col-lg-center">
-          <p></p>
-          <p class="font-weight-bold"></p>
-          <p> </p>
-          <!--<a href="{% url 'index' %}">Back to sign in.</a>-->
-        </div>
+        <div class="alert alert-warning" role="alert">Click below to create an account and give us your info!</div>
+        <a class="btn btn-lg btn-success" href="{% url 'signup'%}?next={{reque}" role="button">Sing up</a>
       </div>
     </div>
     <div class="col-md-4">
-      <!--
-    ~~~~  Start Pannel ~~~~
-      -->
-
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-
-      <div class="alert alert-warning" role="alert">You will need login credentials to get started.</div>
-      <a class="btn btn-lg btn-success" href="{% url 'login'%}?next={{reque}" role="button">Start</a>
+      <h1 class="h3 mb-3 font-weight-normal">Or sign in here</h1>
+      <a class="btn btn-lg btn-success" href="{% url 'login'%}?next={{reque}" role="button">Log in</a>
       <p class="mt-5 mb-3 text-muted"></p>
-
-
     </div>
   </div>
 </div>
