@@ -7,6 +7,7 @@ from .models import Survey
 from pygal.style import CleanStyle
 
 from .reports import DemographicPieChart
+from .reports import MajorPieChart
 # Create your views here.
 
 def index(request):
@@ -84,9 +85,17 @@ class IndexView(TemplateView):
             style=CleanStyle
         )
 
+        cht_major = MajorPieChart(
+            height=600,
+            width=800,
+            explicit_size=True,
+            style=CleanStyle
+        )
+
         # Call the `.generate()` method on our chart object
         # and pass it to template context.
         context['cht_color'] = cht_color.generate()
+        context['cht_major'] = cht_major.generate()
         return context
 
 def survey_graph(request):
