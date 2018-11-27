@@ -20,8 +20,8 @@ class Survey(models.Model):
     name = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
     email = models.EmailField(max_length=70, blank=True, help_text="e.g. Student Email")
     phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
-    year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")  
-    pronoun = models.CharField(max_length=20, null=True, blank=True, help_text="e.g Him/his/he")    
+    year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")
+    pronoun = models.CharField(max_length=20, null=True, blank=True, help_text="e.g Him/his/he")
     dob = models.DateField(null=True, blank=True)
     color = models.BooleanField(default=False)
     firstgen = models.BooleanField(default=False)
@@ -31,3 +31,55 @@ class Survey(models.Model):
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Participant name: %s" %self.name
+
+
+#----------------------------------------------------------------------
+#                             Final
+#----------------------------------------------------------------------
+
+class Affiliate(models.model):
+    #link users to model:
+    #user = models.ForeignKey(User,on_delete=models.CASCADE,)
+    email = models.EmailField(primary_key=True, max_length=70, blank=True, help_text="e.g. Student Email")
+    name = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
+    phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
+    school = models.CharField(max_length=100, blank=True, help_text="e.g. UMass Amherst")
+    dob = models.DateField(null=True, blank=True)
+    #Person of color
+    poc = models.BooleanField(default=False)
+
+    def __str__(self):
+        #String for representing the Model object (in Admin site etc.)
+        return "Affiliate name: %s " %self.name
+
+class Role(models.model):
+    role = models.CharField(max_length=60, blank=True, help_text="e.g. Volenteer")
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
+    date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        #String for representing the Model object (in Admin site etc.)
+        return "Role name: %s " %self.role
+
+class Event(models.model):
+    eventID = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=60, blank=True, help_text="e.g. Party")
+    site = models.CharField(max_length=60, blank=True, help_text="e.g. Caffeteria")
+    date = models.DateField(null=True, blank=True)
+    tour = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        #String for representing the Model object (in Admin site etc.)
+        return "Event name: %s " %self.name
+
+
+class HSStudent(models.model):
+        affiliate = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
+        collegechoice = models.CharField(max_length=10, blank=True, help_text="e.g. UMass, Ucon")
+        pemail = models.EmailField(max_length=70, blank=True, help_text="e.g. Parent Email")
+
+
+    def __str__(self):
+        #String for representing the Model object (in Admin site etc.)
+        return "Student name: %s " %self.affiliate.name
