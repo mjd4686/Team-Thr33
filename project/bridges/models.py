@@ -37,7 +37,7 @@ class Survey(models.Model):
 #                             Final
 #----------------------------------------------------------------------
 
-class Affiliate(models.model):
+class Affiliate(models.Model):
     #link users to model:
     #user = models.ForeignKey(User,on_delete=models.CASCADE,)
     email = models.EmailField(primary_key=True, max_length=70, blank=True, help_text="e.g. Student Email")
@@ -52,7 +52,7 @@ class Affiliate(models.model):
         #String for representing the Model object (in Admin site etc.)
         return "Affiliate name: %s " %self.name
 
-class Role(models.model):
+class Role(models.Model):
     role = models.CharField(max_length=60, blank=True, help_text="e.g. Volenteer")
     affiliate = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
     date = models.DateField(null=True, blank=True)
@@ -61,25 +61,46 @@ class Role(models.model):
         #String for representing the Model object (in Admin site etc.)
         return "Role name: %s " %self.role
 
-class Event(models.model):
+class Event(models.Model):
     eventID = models.AutoField(primary_key=True)
     name = models.CharField(max_length=60, blank=True, help_text="e.g. Party")
     site = models.CharField(max_length=60, blank=True, help_text="e.g. Caffeteria")
     date = models.DateField(null=True, blank=True)
     tour = models.BooleanField(default=False)
 
+    def __str__(self):
+        #String for representing the Model object (in Admin site etc.)
+        return "Event name: %s " %self.name
+
+class EventAttendee(models.Model):
+    email = models.EmailField(primary_key=True, max_length=70, blank=True, help_text="e.g. Student Email")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Event name: %s " %self.name
 
 
-class HSStudent(models.model):
-        affiliate = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
-        collegechoice = models.CharField(max_length=10, blank=True, help_text="e.g. UMass, Ucon")
-        pemail = models.EmailField(max_length=70, blank=True, help_text="e.g. Parent Email")
+class HSStudent(models.Model):
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
+    collegechoice = models.CharField(max_length=100, blank=True, help_text="e.g. UMass, Ucon")
+    pemail = models.EmailField(max_length=70, blank=True, help_text="e.g. Parent Email")
 
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Student name: %s " %self.affiliate.name
+
+class CollegeStudent(models.Model):
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
+    major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
+    major2 = models.CharField(max_length=100, blank=True, help_text="e.g. BA Math ")
+    gradyear = models.DateField(null=True, blank=True)
+    fisrtgen = models.BooleanField(default=False)
+    degree = models.CharField(max_length=100, blank=True, help_text="e.g. MS Art ")
+    job = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor at Umass ")
+    endofyear = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        #String for representing the Model object (in Admin site etc.)
+        return "College student name: %s " %self.affiliate.name

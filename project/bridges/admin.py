@@ -1,7 +1,9 @@
 from django.contrib import admin
-from bridges.models import Survey
 from import_export.admin import ImportExportModelAdmin
-# Register your models here.
+
+from bridges.models import Survey
+from bridges.models import Affiliate
+
 
 @admin.register(Survey)
 class SurveyAdmin(ImportExportModelAdmin):
@@ -10,3 +12,6 @@ class SurveyAdmin(ImportExportModelAdmin):
 #     list_display = ('name', 'email', 'phone', 'year', 'pronoun', 'dob', 'color', 'firstgen', 'workstudy', 'major')
 
 # admin.site.register(Survey, SurveyAdmin)
+@admin.register(Affiliate)
+class Affiliate(ImportExportModelAdmin):
+	list_display = ('name',)
