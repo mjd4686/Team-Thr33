@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'import_export',
     'rest_framework',
+    'django_admin_lightweight_date_hierarchy',
 ]
 
 MIDDLEWARE = [
