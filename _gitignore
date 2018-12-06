@@ -1,3 +1,4 @@
 .vscode/*
 .project/node_modules/*
+.project/bridges/__pycache__/*
 *.pyc
