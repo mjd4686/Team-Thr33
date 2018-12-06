@@ -27,6 +27,8 @@ class Survey(models.Model):
     firstgen = models.BooleanField(default=False)
     workstudy = models.BooleanField(default=False)
     major = models.CharField(max_length=50, blank =True ,help_text="e.g. Comp Sci")
+    date = models.DateField(("Date"), default=datetime.today)
+
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
@@ -104,3 +106,9 @@ class CollegeStudent(models.Model):
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "College student name: %s " %self.affiliate.name
+
+class SaleSummary(Survey):
+    class Meta:
+        proxy = True
+        verbose_name = "Sale Summary"
+        verbose_name_plural = "Sales Summary"
