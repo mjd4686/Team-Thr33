@@ -1,0 +1,40 @@
+{% extends "generic.html" %}
+
+{% block title %}
+  <title>Login</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <form method="post" action="{% url 'login' %}" class="form-signin">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      {% if form.errors %}
+        <div class="alert alert-danger" role="alert">Your username and password didn't match. Please try again or contact Vanessa.</div>
+      {% endif %}
+      <div class="alert alert-secondary" role="alert">Login using your given username and password to begin.</div>
+
+      <div class="text-center">
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+      </div>
+      <div class="text-center mt-2">
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Start</button>
+      <p class="mt-5 mb-3 text-muted">For help see <a href="{% url 'index' %}">info</a>.</p>
+
+
+    </form>
+
+  </div>
+</div>
+
+
+
+{% endblock %}

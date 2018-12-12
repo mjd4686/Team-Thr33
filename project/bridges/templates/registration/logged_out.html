@@ -1,0 +1,29 @@
+
+{% extends "generic.html" %}
+
+{% block title %}
+  <title>Logged Out</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <!--
+    ~~~~  About Pannel ~~~~
+      -->
+      <div class="row justify-content-md-center">
+        <h1 class="display-2">Thanks for participating!</h1>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col col-lg-center">
+          <p>You have been logged out. <br><a href="{% url 'index' %}">Back to sign in.</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
