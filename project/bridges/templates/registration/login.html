@@ -14,7 +14,7 @@
       {% csrf_token %}
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       {% if form.errors %}
-        <div class="alert alert-danger" role="alert">Your username and password didn't match. Please try again or contact Vanessa.</div>
+        <div class="alert alert-danger" role="alert">Your username and password didn't match our records.</div>
       {% endif %}
       <div class="alert alert-secondary" role="alert">Login using your given username and password to begin.</div>
 
@@ -27,7 +27,7 @@
         <td>{{ form.password }}</td>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Start</button>
-      <p class="mt-5 mb-3 text-muted">For help see <a href="{% url 'index' %}">info</a>.</p>
+      <p class="mt-5 mb-3 text-muted">Administration portal <a href="{% url 'admin:index' %">here</a>.</p>
 
 
     </form>

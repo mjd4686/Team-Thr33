@@ -17,5 +17,5 @@ class SurveyForm(forms.ModelForm):
 
 
     class Meta:
-        model = Survey
+        model = People
         fields = ('name', 'email', 'dob','poc', )
