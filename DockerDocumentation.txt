@@ -9,8 +9,12 @@ sudo systemctl enable docker
 // docker daemon needs to be running to build docker images 
 
 sudo docker build -t django .
+// builds the container 
+
 
 sudo docker run -it -p 8000:8000 django
+//runs the container
+// run this not start.sh
 
 DESCRIPTION
 
