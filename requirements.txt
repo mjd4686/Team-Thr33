@@ -1,0 +1,6 @@
+Django==2.1.1
+django-widget-tweaks
+django-bootstrap-form==3.2.1
+pytz==2017.2
+pyyaml==3.12
+django-survey-and-report
