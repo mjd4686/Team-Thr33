@@ -1,0 +1,25 @@
+
+COMMANDS
+
+sudo dnf install docker
+//install docker first command is different on different OS
+
+sudo systemctl enable docker
+// starts docker daemon, may be different for different OS
+// docker daemon needs to be running to build docker images 
+
+sudo docker build -t django .
+// builds the container 
+
+
+sudo docker run -it -p 8000:8000 django
+//runs the container
+// run this not start.sh
+
+DESCRIPTION
+
+Runs in a python 3.6.6 environment, any newer and pyyaml breaks
+
+requirements.txt contains all pip librarys to install
+
+start.sh migrates and runs the server
