@@ -1,0 +1,196 @@
+{% extends "admin/change_list.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+.triangle {
+  font-size: 50%;
+  position: absolute;
+  right: 5px;
+  top: -2px;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 5px;
+  color: #fff;
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+#myInput {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
+</head>
+<body>
+<div class="navbar">
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">First Graph</button>
+<span class='triangle'>&#9660;</span>
+      <div id="myDropdown" class="dropdown-content">
+        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+        <a href="#about">year graph</a>
+        <a href="#base">Base</a>
+        <a href="#blog">Blog</a>
+      </div>
+</div>
+<div class="dropdown">
+<button onclick="myFunction2()" class="dropbtn">Second Graph</button>
+<span class='triangle'>&#9660;</span>
+      <div id="myDropdown2" class="dropdown-content">
+        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+        <a href="x">Abouta</a>
+        <a href="y">Basea</a>
+        <a href="z">Bloga</a>
+      </div>
+</div>
+</div> 
+    <div class="row">
+        <div class="col-sm-4">
+            <canvas id="forecast" style="width: 150px !important;"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <canvas id="forecast2" style="width: 150px !important;"></canvas>
+        </div>
+    </div>
+<button id="0" type="button" >Pie Chart</button>
+<button id="1" type="button" >Bar Chart</button>
+<button id="2" type="button" >Line Chart</button>
+<button id="3" type="button" >Dataset 2</button>
+{{block.super}} 
+</body>
+
+
+</html>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+<script >
+            var randomColorGenerator = function () {
+            return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+        };
+    function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+    function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+{% regroup cl.queryset|dictsort:"name" by name as names_list %}
+  var chart_labels = [{% for name in names_list %}'{{ name.grouper }}',{% endfor %}]
+  document.write(chart_labels)
+  var temp_dataset = [{% for name in names_list %}'{{ name.list|length }}',{% endfor %}];
+  console.log(chart_labels)
+  var ctx = document.getElementById("forecast").getContext('2d');
+  var ctx2 = document.getElementById("forecast2").getContext('2d');
+ var options = {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'left'
+            },
+            title: {
+                display: true
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+  var config = {
+                type: 'doughnut',
+                data: {
+                    labels: chart_labels,
+                    datasets: [{
+                        data: temp_dataset,
+                        backgroundColor: [{% for name in names_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                },
+                options: options
+            };
+  ctx.moveTo(60,40);
+var forecast_chart = new Chart(ctx, config);
+var forecast_chart2 = new Chart(ctx2, config);
+$("#0").click(function() {
+    var data = forecast_chart.config.data;
+    data.datasets[0].data = temp_dataset;
+    data.datasets[1].data = rain_dataset;
+    data.labels = chart_labels;
+    forecast_chart.update();
+});
+$("#1").click(function() {
+    var chart_labels = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
+    var temp_dataset = ['5', '3', '4', '8', '10', '11', '10', '9'];
+    var rain_dataset = ['0', '0', '1', '4', '19', '19', '7', '2'];
+    var data = forecast_chart.config.data;
+    data.datasets[0].data = temp_dataset;
+    data.datasets[1].data = rain_dataset;
+    data.labels = chart_labels;
+    forecast_chart.update();
+});
+</script>
+{% endblock %}
