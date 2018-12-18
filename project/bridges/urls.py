@@ -9,7 +9,6 @@ admin.site.site_title = "Student Bridge Admin Portal"
 admin.site.index_title = "Welcome to Student Bridges Portal"
 urlpatterns = [
     path('', views.index, name='index'),
-    path('form/', views.form.as_view(), name='form'),
-    
+    #path('form/', views.form.as_view(), name='form'),
     path('survey/', include('survey.urls'))
 ]

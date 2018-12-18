@@ -21,7 +21,7 @@
             <td><a class="btn btn-lg btn-success" href="{% url 'login'%}?next={{reque}" role="button">Start</a></td>
           </tr>
           <tr>
-            <td><p class="mt-5 mb-3 text-muted">Administration portal <a href="{% url '/admin/login/?next=/admin/' %">here</a>.</p></td>
+            <td><p class="mt-5 mb-3 text-muted">Administration portal <a href={% url "admin:index" %}>here</a>.</p></td>
           </tr>
         </table>
       </form>

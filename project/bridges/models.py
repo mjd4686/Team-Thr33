@@ -2,29 +2,37 @@ from django.db import models
 from django.urls import reverse
 from datetime import datetime
 from django import forms
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 #----------------------------------------------------------------------
 #                        Main Model
 #----------------------------------------------------------------------
-class People(models.Model):
+class Profile(models.Model):
 
-    email = models.EmailField(primary_key=True, max_length=70, blank=True, help_text="e.g. Student Email")
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(null=True, blank=True)
+
     # year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")
-    name = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
-    phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
-    school = models.CharField(max_length=100, blank=True, help_text="e.g. UMass Amherst")
-    dob = models.DateField(null=True, blank=True)
-    major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
-    poc = models.CharField(max_length=50, blank=True, help_text="e.g. Yes/No")
-    gender = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
-    role = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor, Student, Teacher")
-    fisrtgen = models.BooleanField(default=False)
-    change_list_template = 'chart.html'
+    # phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
+    # school = models.CharField(max_length=100, blank=True, help_text="e.g. UMass Amherst")
+    # major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
+    # poc = models.CharField(max_length=50, blank=True, help_text="e.g. Yes/No")
+    # gender = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
+    # role = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor, Student, Teacher")
+    # firsgen = models.BooleanField(default=False)
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Name: %s " %self.name
+
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()        
 
 
 class Role(models.Model):
@@ -50,7 +58,7 @@ class Event(models.Model):
         return "Event name: %s " %self.name
 
 class EventAttendee(models.Model):
-    people= models.ManyToManyField(People, blank=True)
+    people= models.ManyToManyField(Profile, blank=True)
     event = models.ManyToManyField(Event, blank=True)
 
     def __str__(self):
