@@ -17,7 +17,6 @@ from django.urls import path
 from bridges import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
 ]
 
 # Use include() to add paths from the catalog application
@@ -42,5 +41,5 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
-
+    path('signup/', views.signup, name='signup'),
 ]

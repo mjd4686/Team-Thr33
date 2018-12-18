@@ -27,7 +27,8 @@
         <td>{{ form.password }}</td>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Start</button>
-      <p class="mt-5 mb-3 text-muted">Administration portal <a href="{% url 'admin:index' %">here</a>.</p>
+      <p class="mt-5 mb-3 text-muted">Administration portal <a href={% url "admin:index" %}>here</a>.</p>
+      <p class="mt-5 mb-3 text-muted">Register <a href={% url "signup" %}>here</a>.</p>
 
 
     </form>
