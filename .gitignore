@@ -15,3 +15,6 @@ project/project/__pycache__/wsgi.cpython-36.pyc
 *.pyc
 *.pyc
 *.pyc
+project/project/__pycache__/__init__.cpython-36.pyc
+project/project/__pycache__/settings.cpython-36.pyc
+project/project/__pycache__/urls.cpython-36.pyc

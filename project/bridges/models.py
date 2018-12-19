@@ -15,14 +15,14 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
 
-    # year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")
-    # phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
-    # school = models.CharField(max_length=100, blank=True, help_text="e.g. UMass Amherst")
-    # major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
-    # poc = models.CharField(max_length=50, blank=True, help_text="e.g. Yes/No")
-    # gender = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
-    # role = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor, Student, Teacher")
-    # firsgen = models.BooleanField(default=False)
+    year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")
+    phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
+    school = models.CharField(max_length=100, blank=True, help_text="e.g. UMass Amherst")
+    major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
+    poc = models.CharField(max_length=50, blank=True, help_text="e.g. Yes/No")
+    gender = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
+    firstgen = models.BooleanField(default=False, blank=True)
+    info = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor, Student, Teacher")
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
@@ -32,7 +32,7 @@ class Profile(models.Model):
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-    instance.profile.save()        
+    instance.profile.save()
 
 
 class Role(models.Model):
@@ -52,14 +52,6 @@ class Event(models.Model):
     name = models.CharField(max_length=60, blank=True, help_text="e.g. Party")
     site = models.CharField(max_length=60, blank=True, help_text="e.g. Caffeteria")
     date = models.DateField(null=True, blank=True)
-
-    def __str__(self):
-        #String for representing the Model object (in Admin site etc.)
-        return "Event name: %s " %self.name
-
-class EventAttendee(models.Model):
-    people= models.ManyToManyField(Profile, blank=True)
-    event = models.ManyToManyField(Event, blank=True)
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
