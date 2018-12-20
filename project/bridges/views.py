@@ -23,7 +23,10 @@ def form(request):
     if request.method == 'POST':
         form = SurveyForm(request.POST)
         if form.is_valid():
+            current_user = request.user
             user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.Survey.user = current_user
             user.save()
             form = SurveyForm()
             return redirect('accounts')
