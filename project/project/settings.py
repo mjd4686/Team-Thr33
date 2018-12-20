@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bridges.apps.BridgesConfig',
     'widget_tweaks',
-    'bootstrapform',
-    'survey',
 ]
 
 MIDDLEWARE = [
