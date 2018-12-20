@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Profile
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -17,30 +18,19 @@ def index(request):
 
 from .models import Survey
 from .forms import SurveyForm
-class surveyform(TemplateView):
-    """
-    View function for form.html
-    """
-    # Render the HTML template index.html with the data in the context variable
-    template = 'form.html'
-
-
-    def get(self, request):
-        form = SurveyForm()
-        return render(request, self.template, {'form': form})
-
-    def post(self, request):
+@login_required
+def form(request):
+    if request.method == 'POST':
         form = SurveyForm(request.POST)
         if form.is_valid():
-            data = form.save(commit=False)
-            data.user= request.user
-            data.save()
+            user = form.save()
+            user.save()
             form = SurveyForm()
-            return redirect('form')
+            return redirect('accounts')
+    else:
+        form = SurveyForm()
+    return render(request, 'form.html', {'form': form})
 
-        text = 'There was an error.'
-        args = {'form':form, 'text':text}
-        return render(request, self.template, args)
 
 
 #----------------------------------------------------------------------
@@ -73,7 +63,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('accounts')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
