@@ -35,30 +35,14 @@ def update_user_profile(sender, instance, created, **kwargs):
     instance.profile.save()
 
 class Survey(models.Model):
-    
-    person = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    reference = models.CharField(max_length=150, blank=True)
-    prior_attendee = models.BooleanField(default=False, blank=True)
-    suggestion = models.CharField(max_length=500, blank=True)
-    rating = models.IntegerField(blank=True)
-    comments = models.CharField(max_length=500, blank=True)
-    event_name = models.CharField(max_length=256, blank=True)
+    reference = models.CharField(max_length=150, blank=True, null=True)
+    prior_attendee = models.BooleanField(default=False, blank=True, null=True)
+    suggestion = models.CharField(max_length=500, blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)
+    comments = models.CharField(max_length=500, blank=True, null=True)
+    event_name = models.CharField(max_length=256, blank=True, null=True)
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Survey name: %s " %self.role
 
-#----------------------------------------------------------------------
-#                             Events
-#----------------------------------------------------------------------
-class Event(models.Model):
-    eventID = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=60, blank=True, help_text="e.g. Party")
-    site = models.CharField(max_length=60, blank=True, help_text="e.g. Caffeteria")
-    date = models.DateField(null=True, blank=True)
-    survey = models.ManyToManyField(Survey)
-
-    def __str__(self):
-        #String for representing the Model object (in Admin site etc.)
-        return "Event name: %s " %self.name

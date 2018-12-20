@@ -44,7 +44,6 @@ class SurveyForm(forms.ModelForm):
     comments = forms.CharField(label='Any other thoughts or comments?',max_length=500)
     event_name = forms.CharField(label='Event Name', max_length=256, widget=forms.HiddenInput())
 
-
     class Meta:
         model = Survey
-        fields = ('reference', 'prior_attendee', 'suggestion', 'rating', 'comments')
+        fields = ('reference', 'prior_attendee', 'suggestion', 'rating', 'comments', 'event_name')

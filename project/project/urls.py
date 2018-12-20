@@ -36,11 +36,14 @@ urlpatterns += [
 # Use static() to add url mapping to serve static files during development (only)
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
+#http://127.0.0.1:8000/survey/thankyou
+#http://127.0.0.1:8000/survey/thankyou/
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signup, name='signup'),
-    path('survey/', views.form, name='survey')
+    path('survey/', views.form, name='survey'),
+    path('survey/thankyou/', TemplateView.as_view(template_name='thankyou.html'), name='thanks')
 ]
