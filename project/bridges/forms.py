@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
     birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), help_text="Required.")
-    year = forms.IntegerField(help_text="Optional. e.g. 2020")
+    year = forms.IntegerField(label='Graduation Year',help_text="Optional. e.g. 2020")
     phone = forms.CharField(max_length=10, help_text="Optional. e.g. 555-555-5555")
     school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst")
     major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science")

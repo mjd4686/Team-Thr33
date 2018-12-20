@@ -27,6 +27,13 @@ class Profile(models.Model):
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Name: %s " %self.name
+    def user_first_name(self):
+        return self.user.first_name
+    def user_last_name(self):
+        return self.user.last_name
+    def user_email(self):
+        return self.user.email
+    
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
