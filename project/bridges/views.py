@@ -67,7 +67,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('accounts')
+            return redirect('/survey/thankyou')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -93,7 +93,7 @@ def editprofile(request):
             user.profile.pronoun = form.cleaned_data.get('pronoun')
             user.profile.info = form.cleaned_data.get('info')
             user.save()
-            return redirect('accounts')
+            return redirect('/survey/thankyou')
     else:
         form = EditProfileForm(request=request)
         #use same html template

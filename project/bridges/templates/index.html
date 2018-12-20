@@ -12,13 +12,12 @@
   <div class="text-center">
     <div class="row">
       <form class="form-signin" action="" method="">
-
         <table>
           <tr>
             <td><h1 class="h3 mb-3 font-weight-normal">Bridges</h1></td>
           </tr>
           <tr>
-            <td><a class="btn btn-lg btn-success" href="{% url 'login'%}?next={{reque}" role="button">Start</a></td>
+	    <td><a class="btn btn-lg btn-success" href="{% url 'login'%}?next={% url 'editprofile' %}" role="button">Start</a></td>
           </tr>
           <tr>
             <td><p class="mt-5 mb-3 text-muted">Administration portal <a href={% url "admin:index" %}>here</a>.</p></td>
