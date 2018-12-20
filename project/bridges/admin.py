@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from .models import Profile
 class ProfileAdmin(admin.ModelAdmin):
-	list_display = ( 'user', 'birth_date',)
+	list_display = ( 'user', 'birth_date',"year","phone","school","major","poc","gender","firstgen","trans","info","pronoun")
 	change_list_template = 'chart.html'
 	date_hierarchy = 'birth_date'
 
