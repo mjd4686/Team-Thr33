@@ -74,10 +74,10 @@ def signup(request):
 
 @login_required
 def editprofile(request):
+    user = request.user
     if request.method == 'POST':
-        form = EditProfileForm(request.POST)
+        form = EditProfileForm(request.POST, request=request)
         if form.is_valid():
-            user = request.user
             user.first_name = form.cleaned_data.get('first_name')
             user.last_name = form.cleaned_data.get('last_name')
             user.email = form.cleaned_data.get('email')
@@ -95,6 +95,6 @@ def editprofile(request):
             user.save()
             return redirect('accounts')
     else:
-        form = EditProfileForm()
+        form = EditProfileForm(request=request)
         #use same html template
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form, 'user': user})
