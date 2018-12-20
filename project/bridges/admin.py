@@ -19,12 +19,7 @@ class ProfileAdmin(admin.ModelAdmin):
 from .models import Survey
 
 class SurveyAdmin(admin.ModelAdmin):
-	list_display = ('person', 'reference', 'prior_attendee', 'suggestion', 'rating', 'comments')
-
-
-from .models import Event
-class EventAdmin(admin.ModelAdmin):
-	list_display = ('name', 'site', 'date')
+	list_display = ('reference', 'prior_attendee', 'suggestion', 'rating', 'comments', 'event_name')
 
 
 #----------------------------------------------------------------------
@@ -33,4 +28,3 @@ class EventAdmin(admin.ModelAdmin):
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Survey, SurveyAdmin)
-admin.site.register(Event, EventAdmin)

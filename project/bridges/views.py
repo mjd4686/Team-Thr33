@@ -18,6 +18,7 @@ def index(request):
 
 from .models import Survey
 from .forms import SurveyForm
+from django.contrib.auth import logout
 @login_required
 def form(request):
     if request.method == 'POST':
@@ -26,18 +27,17 @@ def form(request):
             current_user = request.user
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
-            user.Survey.user = current_user
             user.save()
             form = SurveyForm()
-            return redirect('accounts')
+            logout(request)
+            return redirect('thankyou/')
     else:
         form = SurveyForm()
     return render(request, 'form.html', {'form': form})
 
 
-
 #----------------------------------------------------------------------
-#                        Login View
+#                        Signup View
 #----------------------------------------------------------------------
 
 from django.contrib.auth import login, authenticate
