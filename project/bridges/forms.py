@@ -17,19 +17,19 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
     birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), help_text="Required.", required=True)
     year = forms.IntegerField(label="Graduation Year", help_text="Optional. e.g. 2020", required=False)
-    phone = forms.CharField(max_length=10, help_text="Optional. e.g. 555-555-5555", required=False)
+    phone = forms.CharField(max_length=10, label="Phone Number", help_text="Optional. e.g. 555-555-5555", required=False)
     school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst", required=False)
     major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science", required=False)
     pocchoices = ['Prefer not to answer', 'Asian', 'Black/African', 'Hispanic/Latinx', 'Native American', 'Pacific Islander', 'White']
-    poc = forms.ChoiceField(choices=[(x, x) for x in pocchoices], required=True, help_text="I identify as ...")
+    poc = forms.ChoiceField(choices=[(x, x) for x in pocchoices], required=True, label="I identify my ethnicity as:")
     genders = ['Prefer not to answer', 'Female', 'Male', 'Non-binary']
-    gender = forms.ChoiceField(choices=[(x, x) for x in genders], required=True, help_text="I identify as ...")
+    gender = forms.ChoiceField(choices=[(x, x) for x in genders], required=True, label="I identify my gender as:")
     fgchoices = ['Prefer not to answer', 'Yes', 'No']
-    firstgen = forms.ChoiceField(choices=[(x, x) for x in fgchoices], required=True, help_text="Are you the first in your family to go to college?")
+    firstgen = forms.ChoiceField(choices=[(x, x) for x in fgchoices], required=True, label="Are you a first generation student?", help_text="Are you in the first generation of your family that went to college?")
     transchoices = ['Prefer not to answer', 'Yes', 'No']
-    trans = forms.ChoiceField(choices=[(x, x) for x in transchoices], required=True, help_text="Do you identify as trans?")
-    pronoun = forms.CharField(max_length=20, help_text="Optional. e.g. He/his, She/her...", required=False)
-    info = forms.CharField(max_length=100, help_text="Optional. e.g. Tutor, Student, Teacher", required=False)
+    trans = forms.ChoiceField(choices=[(x, x) for x in transchoices], required=True, label="Do you identify as transgender?")
+    pronoun = forms.CharField(max_length=20, label="Preferred Pronouns:", help_text="Optional. e.g. He/his, She/her...", required=False)
+    info = forms.CharField(max_length=100, label="What is your relation with Student Bridges?", help_text="Optional. e.g. Student Member, Staff, etc.", required=False)
 
     class Meta:
         model = User
