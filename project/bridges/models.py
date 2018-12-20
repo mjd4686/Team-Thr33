@@ -24,6 +24,7 @@ class Profile(models.Model):
     trans = models.CharField(max_length=50, blank=True, help_text="e.g. Yes")
     info = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor, Student, Teacher")
     pronoun = models.CharField(max_length=20, blank=True, help_text="e.g. He/his, She/her...");
+    grad_status = models.BooleanField(default = False)
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Name: %s " %self.user
@@ -43,7 +44,8 @@ class Survey(models.Model):
     suggestion = models.CharField(max_length=500, blank=True)
     rating = models.IntegerField(blank=True)
     comments = models.CharField(max_length=500, blank=True)
-    
+    event_name = models.CharField(max_length=256, blank=True)
+
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Survey name: %s " %self.role

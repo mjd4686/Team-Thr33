@@ -51,4 +51,8 @@
   <button class="btn btn-lg btn-primary" type="submit">Submit</button>
 
 </form>
+    <script>
+        var eventName = window.location.toString().match(/\?event=[a-zA-Z0-9]*/)[0].split('=')[1];
+        document.getElementById('id_event_name').value = eventName;
+    </script>
 {% endblock %}
