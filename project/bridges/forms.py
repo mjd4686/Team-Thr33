@@ -17,7 +17,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
     birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), help_text="Required.", required=True)
     year = forms.IntegerField(label="Graduation Year", help_text="Optional. e.g. 2020", required=False)
-    phone = forms.CharField(max_length=10, label="Phone Number", help_text="Optional. e.g. 555-555-5555", required=False)
+    phone = forms.CharField(max_length=12, label="Phone Number", help_text="Optional. e.g. 555-555-5555", required=False)
     school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst", required=False)
     major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science", required=False)
     pocchoices = ['Prefer not to answer', 'Asian', 'Black/African', 'Hispanic/Latinx', 'Native American', 'Pacific Islander', 'White']
@@ -46,7 +46,7 @@ class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
     birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), help_text="Required.", required=True)
     year = forms.IntegerField(label="Graduation Year", help_text="Optional. e.g. 2020", required=False)
-    phone = forms.CharField(max_length=10, label="Phone Number", help_text="Optional. e.g. 555-555-5555", required=False)
+    phone = forms.CharField(max_length=12, label="Phone Number", help_text="Optional. e.g. 555-555-5555", required=False)
     school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst", required=False)
     major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science", required=False)
     pocchoices = ['Prefer not to answer', 'Asian', 'Black/African', 'Hispanic/Latinx', 'Native American', 'Pacific Islander', 'White']
