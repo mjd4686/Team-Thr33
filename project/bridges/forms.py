@@ -19,12 +19,14 @@ class SignUpForm(UserCreationForm):
     phone = forms.CharField(max_length=10, help_text="Optional. e.g. 555-555-5555")
     school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst")
     major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science")
-    pocchoices = ['Asian', 'Black/African', 'Hispanic/Latinx', 'Native American', 'Pacific Islander', 'White', 'Prefer not to answer']
+    pocchoices = ['Prefer not to answer', 'Asian', 'Black/African', 'Hispanic/Latinx', 'Native American', 'Pacific Islander', 'White']
     poc = forms.ChoiceField(choices=[(x, x) for x in pocchoices], required=True, help_text="Optional. I identify as ...")
-    genders = ['Female', 'Male', 'Non-binary', 'Prefer not to answer']
+    genders = ['Prefer not to answer', 'Female', 'Male', 'Non-binary']
     gender = forms.ChoiceField(choices=[(x, x) for x in genders], required=True, help_text="Optional. I identify as ...")
-    fgchoices = ['Yes', 'No', 'Prefer not to answer']
+    fgchoices = ['Prefer not to answer', 'Yes', 'No']
     firstgen = forms.ChoiceField(choices=[(x, x) for x in fgchoices], required=True, help_text="Optional. Are you the first in your family to go to college?")
+    transchoices = ['Prefer not to answer', 'Yes', 'No']
+    trans = forms.ChoiceField(choices=[(x, x) for x in transchoices], required=True, help_text="Optional. Do you identify as trans?")
     pronoun = forms.CharField(max_length=20, help_text="Optional. e.g. He/his, She/her...")
     info = forms.CharField(max_length=100, help_text="Optional. e.g. Tutor, Student, Teacher")
 
