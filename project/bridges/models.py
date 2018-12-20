@@ -44,7 +44,7 @@ def update_user_profile(sender, instance, created, **kwargs):
 class Survey(models.Model):
     
     person = models.OneToOneField(User, on_delete=models.CASCADE)
-    
+
     reference = models.CharField(max_length=150, blank=True)
     prior_attendee = models.BooleanField(default=False, blank=True)
     suggestion = models.CharField(max_length=500, blank=True)

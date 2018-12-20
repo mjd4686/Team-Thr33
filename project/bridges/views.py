@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Profile
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -17,6 +18,7 @@ def index(request):
 
 from .models import Survey
 from .forms import SurveyForm
+@login_required
 def form(request):
     if request.method == 'POST':
         form = SurveyForm(request.POST)
