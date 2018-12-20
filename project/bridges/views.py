@@ -24,7 +24,6 @@ class surveyform(TemplateView):
     # Render the HTML template index.html with the data in the context variable
     template = 'form.html'
 
-
     def get(self, request):
         form = SurveyForm()
         return render(request, self.template, {'form': form})
