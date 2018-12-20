@@ -15,11 +15,11 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
-    birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), help_text="Required." required=True)
+    birth_date = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), help_text="Required.", required=True)
     year = forms.IntegerField(label="Graduation Year", help_text="Optional. e.g. 2020", required=False)
     phone = forms.CharField(max_length=10, help_text="Optional. e.g. 555-555-5555", required=False)
-    school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst" required=False)
-    major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science" required=False)
+    school = forms.CharField(max_length=100, help_text="Optional. e.g. UMass Amherst", required=False)
+    major = forms.CharField(max_length=100, help_text="Optional. e.g. BS Computer Science", required=False)
     pocchoices = ['Prefer not to answer', 'Asian', 'Black/African', 'Hispanic/Latinx', 'Native American', 'Pacific Islander', 'White']
     poc = forms.ChoiceField(choices=[(x, x) for x in pocchoices], required=True, help_text="I identify as ...")
     genders = ['Prefer not to answer', 'Female', 'Male', 'Non-binary']
