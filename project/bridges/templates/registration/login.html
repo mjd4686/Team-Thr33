@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
 
-    <form method="post" action="{% url 'login' %}" class="form-signin">
+    <form method="post" action="{% url 'login' %}?next={{ request.GET.next }}" class="form-signin">
       {% csrf_token %}
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       {% if form.errors %}
