@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 #----------------------------------------------------------------------
 #                        Main Model
 #----------------------------------------------------------------------
@@ -35,15 +34,19 @@ def update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
-
-class Role(models.Model):
-    role = models.CharField(max_length=60, blank=True, help_text="e.g. Volenteer")
-    #person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    date = models.DateField(null=True, blank=True)
-
+class Survey(models.Model):
+    
+    person = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    reference = models.CharField(max_length=150, blank=True)
+    prior_attendee = models.BooleanField(default=False, blank=True)
+    suggestion = models.CharField(max_length=500, blank=True)
+    rating = models.IntegerField(blank=True)
+    comments = models.CharField(max_length=500, blank=True)
+    
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
-        return "Role name: %s " %self.role
+        return "Survey name: %s " %self.role
 
 #----------------------------------------------------------------------
 #                             Events
@@ -53,6 +56,7 @@ class Event(models.Model):
     name = models.CharField(max_length=60, blank=True, help_text="e.g. Party")
     site = models.CharField(max_length=60, blank=True, help_text="e.g. Caffeteria")
     date = models.DateField(null=True, blank=True)
+    survey = models.ManyToManyField(Survey)
 
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)

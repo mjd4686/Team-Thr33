@@ -1,4 +1,5 @@
 from django import forms
+from .models import Survey
 from datetime import datetime
 #----------------------------------------------------------------------
 #                         Users
@@ -34,3 +35,15 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'birth_date', 'email', 'password1', 'password2', 'year', 'phone', 'school', 'major', 'gender', 'poc', 'firstgen', 'info')
 
+class SurveyForm(forms.ModelForm):
+
+    reference = forms.CharField(label='How did you hear about this event?',max_length=150)
+    prior_attendee = forms.TypedChoiceField(label='Have you ever been to a Student Bridges event before today?',coerce=lambda x: x =='True', choices=((False, 'No'), (True, 'Yes')))
+    suggestion = forms.CharField(label='What kind of events would you like to see from SB next year?',max_length=500)
+    rating = forms.ChoiceField(label='On a scale from 1-5, how much did you enjoy the event today?',choices=[(x, x) for x in range(1, 5)], help_text='')
+    comments = forms.CharField(label='Any other thoughts or comments?',max_length=500)
+
+
+    class Meta:
+        model = Survey
+        fields = ('reference', 'prior_attendee', 'suggestion', 'rating', 'comments')
