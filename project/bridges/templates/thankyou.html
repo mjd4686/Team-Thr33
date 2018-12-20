@@ -4,4 +4,12 @@
             <h1>Thank you for submitting!</h1>
         </center>
     </body>
+    
+    <script>
+        function redirect(){
+           window.location.href = "/accounts/login/?next=/editprofile/";
+        }
+        
+        setTimeout(redirect, 2000); //2000 is equivalent to 2 seconds
+    </script> 
 </html>
