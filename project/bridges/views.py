@@ -15,6 +15,33 @@ def index(request):
         'index.html',
     )
 
+from .models import Survey
+from .forms import SurveyForm
+class surveyform(TemplateView):
+    """
+    View function for form.html
+    """
+    # Render the HTML template index.html with the data in the context variable
+    template = 'form.html'
+
+
+    def get(self, request):
+        form = SurveyForm()
+        return render(request, self.template, {'form': form})
+
+    def post(self, request):
+        form = SurveyForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user= request.user
+            data.save()
+            form = SurveyForm()
+            return redirect('form')
+
+        text = 'There was an error.'
+        args = {'form':form, 'text':text}
+        return render(request, self.template, args)
+
 
 #----------------------------------------------------------------------
 #                        Login View
