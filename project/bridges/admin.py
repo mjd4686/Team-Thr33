@@ -16,10 +16,15 @@ class ProfileAdmin(admin.ModelAdmin):
 	def user_email(self, instance):
 		return instance.user.email
 
+from .models import Survey
+
+class SurveyAdmin(admin.ModelAdmin):
+	list_display = ('person', 'reference', 'prior_attendee', 'suggestion', 'rating', 'comments')
+
 
 from .models import Event
 class EventAdmin(admin.ModelAdmin):
-	list_display = ('name',)
+	list_display = ('name', 'site', 'date')
 
 
 #----------------------------------------------------------------------
@@ -27,4 +32,5 @@ class EventAdmin(admin.ModelAdmin):
 #----------------------------------------------------------------------
 
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Event, EventAdmin)

@@ -42,6 +42,7 @@ class SurveyForm(forms.ModelForm):
     suggestion = forms.CharField(label='What kind of events would you like to see from SB next year?',max_length=500)
     rating = forms.ChoiceField(label='On a scale from 1-5, how much did you enjoy the event today?',choices=[(x, x) for x in range(1, 5)], help_text='')
     comments = forms.CharField(label='Any other thoughts or comments?',max_length=500)
+    event_name = forms.CharField(label='Event Name', max_length=256, widget=forms.HiddenInput())
 
 
     class Meta:
