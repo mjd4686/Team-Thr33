@@ -14,7 +14,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
 
-    year = models.IntegerField(default=datetime.now().year, blank=True, help_text="e.g. 2020")
+    year = models.IntegerField(default=datetime.now().year, null=True, blank=True, help_text="e.g. 2020")
     phone = models.CharField(max_length=10, blank=True, help_text="e.g. 555-555-5555")
     school = models.CharField(max_length=100, blank=True, help_text="e.g. UMass Amherst")
     major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
