@@ -42,5 +42,6 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signup, name='signup'),
-    path('survey/', views.form, name='survey')
+    path('survey/', views.form, name='survey'),
+    path('editprofile/', views.editprofile, name='editprofile')
 ]
