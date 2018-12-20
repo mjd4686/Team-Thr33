@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -80,9 +79,12 @@
 <span class='triangle'>&#9660;</span>
       <div id="myDropdown" class="dropdown-content">
         <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-        <a href="#about">year graph</a>
-        <a href="#base">Base</a>
-        <a href="#blog">Blog</a>
+        <a id="student1" href="#about">No of student vs major</a>
+        <a id="student2" href="#about">Person of color vs Non-Person of color</a>
+        <a id="student3" href="#about">Percentage of studnet who graduated</a>
+        <a id="student4" href="#about">Percentage of Person of color who graduated</a>
+        <a id="student5" href="#about">Percentage of First Generation Graduation</a>
+        <a id="student6" href="#about">Percentage of Number of student in each major</a>
       </div>
 </div>
 <div class="dropdown">
@@ -90,9 +92,12 @@
 <span class='triangle'>&#9660;</span>
       <div id="myDropdown2" class="dropdown-content">
         <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-        <a href="x">Abouta</a>
-        <a href="y">Basea</a>
-        <a href="z">Bloga</a>
+        <a id="students1" href="#about">No of student vs major</a>
+        <a id="students2" href="#about">Person of color vs Non-Person of color</a>
+        <a id="students3" href="#about">Percentage of studnet who graduated</a>
+        <a id="students4" href="#about">Percentage of Person of color who graduated</a>
+        <a id="students5" href="#about">Percentage of Frist Generation Graduation</a>
+        <a id="students6" href="#about">Percentage of Number of student in each major</a>
       </div>
 </div>
 </div> 
@@ -140,11 +145,10 @@ function filterFunction() {
         }
     }
 }
-{% regroup cl.queryset|dictsort:"name" by name as names_list %}
-  var chart_labels = [{% for name in names_list %}'{{ name.grouper }}',{% endfor %}]
-  document.write(chart_labels)
-  var temp_dataset = [{% for name in names_list %}'{{ name.list|length }}',{% endfor %}];
-  console.log(chart_labels)
+{% regroup cl.queryset|dictsort:"school" by school as schools_list %}
+  var chart_labels = [{% for school in schools_list %}'{{ school.grouper }}',{% endfor %}]
+  var temp_dataset = [{% for school in schools_list %}'{{ school.list|length }}',{% endfor %}];
+  console.log(temp_dataset)
   var ctx = document.getElementById("forecast").getContext('2d');
   var ctx2 = document.getElementById("forecast2").getContext('2d');
  var options = {
@@ -167,7 +171,7 @@ function filterFunction() {
                     labels: chart_labels,
                     datasets: [{
                         data: temp_dataset,
-                        backgroundColor: [{% for name in names_list %}randomColorGenerator(),{% endfor %}]
+                        backgroundColor: [{% for school in schools_list %}randomColorGenerator(),{% endfor %}]
                     }]
                 },
                 options: options
@@ -179,18 +183,51 @@ $("#0").click(function() {
     var data = forecast_chart.config.data;
     data.datasets[0].data = temp_dataset;
     data.datasets[1].data = rain_dataset;
+
     data.labels = chart_labels;
     forecast_chart.update();
 });
 $("#1").click(function() {
-    var chart_labels = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
-    var temp_dataset = ['5', '3', '4', '8', '10', '11', '10', '9'];
-    var rain_dataset = ['0', '0', '1', '4', '19', '19', '7', '2'];
+	var opt = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
+	var config_data=forecast_chart.config
+	forecast_chart.destroy();
+	config_data.type='bar'
+	config_data.options=opt
+	forecast_chart=new Chart(ctx,config_data)
+	console.log(config_data.data.datasets.data)
+});
+$("#student1").click(function() {
+	{% regroup cl.queryset|dictsort:"major" by major as majors_list %}
+	  var chart_labels = [{% for major in majors_list %}'{{ major.grouper }}',{% endfor %}];
+  		var temp_dataset = [{% for major in majors_list %}'{{ major.list|length }}',{% endfor %}];
     var data = forecast_chart.config.data;
     data.datasets[0].data = temp_dataset;
-    data.datasets[1].data = rain_dataset;
     data.labels = chart_labels;
+    data.datasets[0].backgroundColor= [{% for major in majors_list %}randomColorGenerator(),{% endfor %}]
     forecast_chart.update();
+    document.getElementById("myDropdown").classList.toggle("show");
 });
+$("#student2").click(function() {
+	{% regroup cl.queryset|dictsort:"fisrtgen" by fisrtgen as fisrtgens_list %}
+	var chart_labels = [{% for fisrtgen in fisrtgens_list %}'{{ fisrtgen.grouper }}',{% endfor %}];
+  	var temp_dataset = [{% for fisrtgen in fisrtgens_list %}'{{ fisrtgen.list|length }}',{% endfor %}];
+  	console.log(chart_labels)
+  	console.log(temp_dataset)
+    var data = forecast_chart.config.data;
+    data.datasets[0].data = temp_dataset;
+    data.labels = chart_labels;
+    data.datasets[0].backgroundColor= [{% for major in majors_list %}randomColorGenerator(),{% endfor %}]
+    forecast_chart.update();
+    document.getElementById("myDropdown").classList.toggle("show");
+});
+
 </script>
 {% endblock %}
