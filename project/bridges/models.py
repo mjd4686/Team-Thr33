@@ -21,9 +21,10 @@ class Profile(models.Model):
     major = models.CharField(max_length=100, blank=True, help_text="e.g. BS Computer Science")
     poc = models.CharField(max_length=50, blank=True, help_text="e.g. Yes/No")
     gender = models.CharField(max_length=60, blank=True, help_text="e.g. John Smith")
-    firstgen = models.BooleanField(default=False, blank=True)
+    firstgen = models.CharField(max_length=10, blank=True)
+    trans = models.CharField(max_length=50, blank=True, help_text="e.g. Yes")
     info = models.CharField(max_length=100, blank=True, help_text="e.g. Tutor, Student, Teacher")
-
+    pronoun = models.CharField(max_length=20, blank=True, help_text="e.g. He/his, She/her...");
     def __str__(self):
         #String for representing the Model object (in Admin site etc.)
         return "Name: %s " %self.name
