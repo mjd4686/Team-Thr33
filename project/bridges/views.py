@@ -41,6 +41,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
 from .forms import SignUpForm
+from .forms import EditProfileForm
 
 def signup(request):
     if request.method == 'POST':
@@ -66,4 +67,31 @@ def signup(request):
             return redirect('accounts')
     else:
         form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+@login_required
+def editprofile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+            user.email = form.cleaned_data.get('email')
+            user.profile.birth_date = form.cleaned_data.get('birth_date')
+            user.profile.year = form.cleaned_data.get('year')
+            user.profile.phone = form.cleaned_data.get('phone')
+            user.profile.school = form.cleaned_data.get('school')
+            user.profile.major = form.cleaned_data.get('major')
+            user.profile.poc = form.cleaned_data.get('poc')
+            user.profile.gender = form.cleaned_data.get('gender')
+            user.profile.firstgen = form.cleaned_data.get('firstgen')
+            user.profile.trans = form.cleaned_data.get('trans')
+            user.profile.pronoun = form.cleaned_data.get('pronoun')
+            user.profile.info = form.cleaned_data.get('info')
+            user.save()
+            return redirect('accounts')
+    else:
+        form = EditProfileForm()
+        #use same html template
     return render(request, 'signup.html', {'form': form})
